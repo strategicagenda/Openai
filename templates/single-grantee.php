@@ -135,6 +135,13 @@ get_header();
                                 </div>
                             <?php endif; ?>
 
+                            <?php if ( $timeline_display ) : ?>
+                                <div class="grantee-sidebar-block">
+                                    <strong><?php _e( 'Grant Timeline:', 'grantee-listing' ); ?></strong>
+                                    <p><?php echo $timeline_display; ?></p>
+                                </div>
+                            <?php endif; ?>
+
                             <?php if ( $address ) : ?>
                                 <div class="grantee-sidebar-block">
                                     <strong><?php _e( 'Address:', 'grantee-listing' ); ?></strong>
