@@ -1,0 +1,629 @@
+/* Grantee Listing Basic Styles */
+
+/* --- Global Container for Shortcode Output --- */
+.grantee-listing-shortcode-wrapper {
+    /* Add padding, max-width, etc. here if needed */
+}
+
+/* --- Summary Boxes --- */
+.grantee-summary-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between boxes */
+    margin-bottom: 30px;
+    justify-content: center; /* Center boxes if they don't fill the width */
+}
+
+.summary-box {
+    flex: 1; /* Allows boxes to grow */
+    min-width: 180px; /* Minimum width before wrapping */
+    max-width: 300px; /* Max width for larger screens */
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.summary-box .summary-value {
+    font-size: 1.4em; /* Reduced from 2em */
+    font-weight: bold;
+    color: #0073aa; /* Example color - ADJUST AS NEEDED */
+    margin-bottom: 5px;
+}
+
+.summary-box .summary-label {
+    font-size: 0.65em; /* Reduced from 0.9em */
+    color: #555;
+}
+
+
+/* --- Filter Form --- */
+.grantee-filters-form {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between filter groups */
+    align-items: flex-end; /* Align items to the bottom of the row */
+}
+
+.grantee-filters-form .filter-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow filter groups to grow */
+    min-width: 180px; /* Minimum width for each filter group */
+}
+
+.grantee-filters-form label {
+    font-size: 0.65em; /* Reduced from 0.9em */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.grantee-filters-form input[type="search"],
+.grantee-filters-form select {
+    font-size: 0.7em; /* Reduced from 1em */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%; /* Make inputs/selects fill their container */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    /* Ensure consistent height for inputs and selects */
+    height: 38px; /* This height might need adjustment if you change font size drastically */
+}
+
+.grantee-filters-form .submit-filter {
+    flex-grow: 0; /* Prevent submit group from growing excessively */
+    display: flex; /* Use flex for the button and clear link */
+    align-items: center;
+    gap: 10px; /* Space between button and clear link */
+}
+
+.grantee-filters-form button[type="submit"] {
+    font-size: 0.7em; /* Reduced from 1em */
+    padding: 8px 15px;
+    background-color: #0073aa; /* WP Blue - ADJUST AS NEEDED */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1.5; /* Match line-height of inputs approx */
+    transition: background-color 0.2s ease;
+}
+.grantee-filters-form button[type="submit"]:hover {
+    background-color: #005a87; /* Darker WP Blue */
+}
+
+.grantee-filters-form .clear-filters {
+    font-size: 0.65em; /* Reduced from 0.9em */
+    text-decoration: none;
+    color: #0073aa; /* WP Blue - ADJUST AS NEEDED */
+    white-space: nowrap; /* Prevent link from wrapping */
+    transition: text-decoration 0.2s ease;
+}
+.grantee-filters-form .clear-filters:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for filters */
+@media (max-width: 768px) {
+    .grantee-filters-form {
+        flex-direction: column; /* Stack filter groups */
+        align-items: stretch; /* Stretch groups to full width */
+    }
+    .grantee-filters-form .filter-group {
+        width: 100%;
+        min-width: auto; /* Remove min-width constraint when stacked */
+    }
+    .grantee-filters-form .submit-filter {
+        justify-content: space-between; /* Space out button and clear link */
+    }
+}
+
+
+/* --- Grantee List Wrapper (Grid Layout) --- */
+.grantee-list-wrapper {
+    display: grid;
+    gap: 25px; /* Space between cards */
+    margin-bottom: 30px;
+}
+
+/* Adjust grid columns based on shortcode attribute */
+/* Using minmax(min_width, 1fr) for responsive grid */
+.grantee-list-wrapper.grantee-columns-1 { grid-template-columns: 1fr; }
+.grantee-list-wrapper.grantee-columns-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grantee-list-wrapper.grantee-columns-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grantee-list-wrapper.grantee-columns-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grantee-list-wrapper.grantee-columns-5 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.grantee-list-wrapper.grantee-columns-6 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+
+/* --- Individual Grantee Card (List View) --- */
+.grantee-item-card.grantee-list-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+    position: relative; /* Needed for absolute positioning of logo */
+    padding: 20px; /* Add internal padding */
+}
+.grantee-item-card.grantee-list-card:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-body {
+     padding: 0;
+     flex-grow: 1;
+     display: flex;
+     flex-direction: column;
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-title {
+    font-size: 0.9em;
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.3;
+    font-weight: bold;
+}
+.grantee-item-card.grantee-list-card .grantee-card-title a {
+    text-decoration: none;
+    color: #333;
+}
+.grantee-item-card.grantee-list-card .grantee-card-title a:hover {
+    color: #0073aa;
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-project {
+    font-size: 0.65em;
+    color: #555;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-meta {
+    font-size: 0.65em;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #666;
+}
+.grantee-item-card.grantee-list-card .grantee-card-meta .label {
+     font-size: 0.7em;
+     font-weight: bold;
+     display: inline-block;
+     min-width: 80px;
+}
+.grantee-item-card.grantee-list-card .grantee-card-meta a {
+     color: #0073aa;
+     text-decoration: none;
+}
+.grantee-item-card.grantee-list-card .grantee-card-meta a:hover {
+    text-decoration: underline;
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-description {
+    font-size: 0.65em;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+.grantee-item-card.grantee-list-card .grantee-card-description .read-more {
+    font-weight: bold;
+    color: #0073aa;
+    text-decoration: none;
+}
+.grantee-item-card.grantee-list-card .grantee-card-description .read-more:hover {
+    text-decoration: underline;
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+    position: relative;
+    padding-right: 80px;
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-funding {
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #d9534f;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.grantee-item-card.grantee-list-card .grantee-card-logo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    border: 1px solid #eee;
+}
+.grantee-item-card.grantee-list-card .grantee-card-logo img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.grantee-item-card.grantee-list-card .grantee-card-placeholder-logo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9e9e9;
+    color: #aaa;
+}
+.grantee-item-card.grantee-list-card .grantee-card-placeholder-logo span {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.no-grantees-found {
+    font-size: 0.7em;
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
+}
+
+.grantee-pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+.grantee-pagination .page-numbers {
+     font-size: 0.8em;
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #0073aa;
+    border-radius: 3px;
+}
+.grantee-pagination .page-numbers.current,
+.grantee-pagination .page-numbers:hover {
+    background-color: #0073aa;
+    color: #fff;
+    border-color: #0073aa;
+}
+.grantee-pagination .page-numbers.dots {
+    border: none;
+    background: none;
+    color: #333;
+}
+
+@media (max-width: 480px) {
+    .grantee-list-wrapper.grantee-columns-2,
+    .grantee-list-wrapper.grantee-columns-3,
+    .grantee-list-wrapper.grantee-columns-4,
+    .grantee-list-wrapper.grantee-columns-5,
+    .grantee-list-wrapper.grantee-columns-6 {
+        grid-template-columns: 1fr;
+    }
+    .grantee-item-card.grantee-list-card .grantee-card-bottom {
+        padding-right: 70px;
+    }
+    .grantee-item-card.grantee-list-card .grantee-card-logo {
+         width: 60px;
+         height: 60px;
+    }
+    .grantee-item-card.grantee-list-card .grantee-card-placeholder-logo span {
+        font-size: 1.2em;
+    }
+    .grantee-summary-boxes {
+         flex-direction: column;
+         align-items: stretch;
+     }
+     .summary-box {
+         max-width: none;
+     }
+}
+/* 1. Remove your own max-width */
+.grantee-single-page {
+  max-width: none !important;
+  width: 100% !important;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Break out of the theme’s centred container */
+body.single .grantee-single-page, /* or body.single-grantee if you have that body class */
+body.single-post .grantee-single-page {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+/* 3. Kill any parent padding that may appear */
+body.single .site-content,
+body.single-post .content-area {
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+
+/* --- STYLES FOR SINGLE GRANTEE PAGE (using custom template) --- */
+
+/* This is the outermost container within single-grantee.php */
+/* It should fill the width provided by the theme's #primary or .content-area */
+.grantee-single-page {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0; /* Theme should handle outer padding */
+	
+}
+
+/* Wrapper for the back button, centered with max-width */
+.grantee-back-button-wrap {
+    max-width: 1140px; /* ADJUST TO MATCH YOUR THEME'S CONTENT WIDTH */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 20px 0 20px; /* Top padding, horizontal padding to match content */
+    box-sizing: border-box;
+}
+
+/* Container for the 3-column grid layout, centered with max-width */
+.grantee-single-grid-container {
+    max-width: 1140px; /* ADJUST TO MATCH YOUR THEME'S CONTENT WIDTH */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Internal padding for the grid container */
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 30px; /* Space between columns - ADJUST AS NEEDED */
+    margin-top: 0; /* No top margin, handled by back button wrapper or theme */
+}
+
+/* Main content area (Name, Project, Countries, Timeline, Description) */
+.grantee-main-content-area {
+    grid-column: 1 / span 2; /* This area spans the first 2 columns */
+    min-width: 0; /* Important for grid item wrapping/sizing */
+}
+
+/* Sidebar meta area (Logo, Funding, Address, Types, Website, Socials) */
+.grantee-sidebar-meta-area {
+    grid-column: 3 / span 1; /* This area spans the 3rd column */
+    min-width: 0; /* Important for grid item wrapping/sizing */
+    align-self: start; /* Align to the start of the grid area */
+}
+
+/* Styling for the key meta block (Logo, Funding, Address) */
+.grantee-key-meta-block {
+    background-color: #f8f8f8; /* Light background - ADJUST AS NEEDED */
+    padding: 20px; /* Padding inside the block */
+    border-radius: 5px; /* Optional rounding */
+    margin-bottom: 30px; /* Space below this key block */
+}
+
+
+/* --- Typography and Spacing within Columns --- */
+
+.grantee-single-page .entry-title.grantee-name {
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 0.2em;
+    color: #008080;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.grantee-single-page .grantee-project-name {
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+    color: #333;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+.grantee-single-page .grantee-main-content-area .grantee-info-block {
+     margin-bottom: 1em;
+}
+.grantee-single-page .grantee-main-content-area .grantee-info-block strong {
+     font-size: 0.7em;
+     display: inline-block;
+     margin-right: 0.5em;
+     font-weight: bold;
+}
+.grantee-single-page .grantee-main-content-area .grantee-info-block p {
+     font-size: 0.7em;
+     display: inline;
+     margin: 0;
+     color: #555;
+     line-height: 1.6;
+}
+
+.grantee-single-page .entry-content.grantee-description {
+    font-size: 0.7em;
+    margin-top: 2em;
+    line-height: 1.7;
+    color: #333;
+}
+.grantee-single-page .entry-content.grantee-description p:first-child { margin-top: 0; }
+.grantee-single-page .entry-content.grantee-description p,
+.grantee-single-page .entry-content.grantee-description ul,
+.grantee-single-page .entry-content.grantee-description ol {
+    margin-bottom: 1em;
+}
+.grantee-single-page .entry-content.grantee-description li {
+    margin-bottom: 0.5em;
+}
+
+.grantee-single-page .grantee-sidebar-block {
+    margin-bottom: 1.5em;
+}
+.grantee-single-page .grantee-sidebar-block:last-child {
+     margin-bottom: 0;
+}
+
+.grantee-single-page .grantee-sidebar-block strong {
+    font-size: 0.7em;
+    display: block;
+    margin-bottom: 0.3em;
+    font-weight: bold;
+    color: #333;
+}
+.grantee-single-page .grantee-sidebar-block p {
+    font-size: 0.7em;
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.grantee-sidebar-logo {
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+}
+.grantee-sidebar-logo img {
+    max-width: 100%;
+    height: auto;
+    max-height: 150px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+}
+
+.grantee-sidebar-block.grantee-website-sidebar a {
+     color: #c80000;
+     text-decoration: none;
+}
+.grantee-sidebar-block.grantee-website-sidebar a:hover {
+    text-decoration: underline;
+}
+
+.grantee-sidebar-block.grantee-socials-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.3em 0 0 0;
+}
+.grantee-sidebar-block.grantee-socials-sidebar ul li {
+    margin-bottom: 0.5em;
+}
+.grantee-sidebar-block.grantee-socials-sidebar ul li a {
+    font-size: 0.7em;
+     color: #0073aa;
+     text-decoration: none;
+}
+.grantee-sidebar-block.grantee-socials-sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+.grantee-back-button-wrap {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.grantee-back-button {
+    font-size: 0.65em;
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #eee;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    line-height: normal;
+}
+
+.grantee-back-button:hover {
+    background-color: #ddd;
+    border-color: #bbb;
+    color: #000;
+}
+
+
+/* Responsive adjustments for single page layout */
+@media (max-width: 768px) {
+    .grantee-single-grid-container {
+        grid-template-columns: 1fr; /* Stack columns on mobile */
+        gap: 30px; /* Adjust gap when stacked */
+    }
+    .grantee-main-content-area,
+    .grantee-sidebar-meta-area {
+        grid-column: span 1; /* Each takes full width when stacked */
+        min-width: auto;
+        margin-bottom: 20px; /* Add space between stacked blocks */
+    }
+    .grantee-sidebar-meta-area:last-child {
+        margin-bottom: 0;
+    }
+
+    .grantee-single-page .entry-title.grantee-name {
+        font-size: 1.6em; /* Reduced further for smaller screens */
+    }
+    .grantee-single-page .grantee-project-name {
+        font-size: 0.9em; /* Reduced further for smaller screens */
+    }
+
+     /* Back button styling on mobile */
+     .grantee-back-button {
+         max-width: 100%; /* Allow it to be wider if needed on small screens */
+     }
+}
+/* --- Importer Column Mapping Table --- */
+.grantee-column-mapping-table {
+    margin-bottom: 20px;
+}
+.grantee-column-mapping-table th,
+.grantee-column-mapping-table td {
+    padding: 8px 10px;
+    vertical-align: middle;
+}
+.grantee-column-mapping-table th {
+    text-align: left;
+    width: 30%;
+}
+.grantee-column-mapping-table td select {
+    width: 100%;
+    max-width: 350px;
+}
+.grantee-column-mapping-table .required {
+    color: red;
+    font-weight: bold;
+}
+
+.grantee-preview-table {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.grantee-preview-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; /* Adjust for better preview */
+}
